@@ -1,0 +1,12 @@
+.authenticatePage {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    font-family: 'Raleway', sans-serif;
+}
