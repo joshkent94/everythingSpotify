@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "./AuthenticationSlice";
 import './Authentication.css';
 
-function Authentication() {
+export default function Authentication() {
     const dispatch = useDispatch();
 
     const signIn = () => dispatch(authenticate({isSignedIn: true}));
@@ -13,5 +13,3 @@ function Authentication() {
         </div>
     )
 };
-
-export default Authentication;
