@@ -1,5 +1,5 @@
 export default function Subscriptions() {
     return (
-        <p></p>
+        <p>Some text</p>
     );
 };

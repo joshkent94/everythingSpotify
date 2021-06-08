@@ -4,7 +4,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  display: flex;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 #root {
@@ -12,6 +12,50 @@ body {
     width: 100%;
 }
 
+.nav-div {
+  display: inline-flex;
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.nav-links {
+  width: 60%;
+  margin: 0;
+  display: inline-block;
+
+}
+
+.nav-search {
+  width: 30%;
+  display: inline-block;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav ul li {
+  margin-bottom: 0 !important;
+}
+
+nav a {
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+}
+
 nav a.active {
   font-weight: bold;
+}
+
+nav a:hover {
+  color: black;
 }

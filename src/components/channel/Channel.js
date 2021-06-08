@@ -1,5 +1,5 @@
 export default function Channel() {
     return (
-        <p></p>
+        <p>Some text</p>
     );
 };

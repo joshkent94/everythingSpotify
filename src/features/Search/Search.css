@@ -1,0 +1,8 @@
+form {
+    width: 70%;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    box-shadow: none;
+}

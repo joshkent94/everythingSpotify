@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
 import { selectAuthentication } from './features/Authentication/AuthenticationSlice';
-import Home from './components/Home';
-import Subscriptions from './components/Subscriptions';
-import Channel from './components/Channel';
+import Home from './components/home/Home';
+import Subscriptions from './components/subscriptions/Subscriptions';
+import Channel from './components/channel/Channel';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,28 +12,33 @@ import {
   NavLink,
   useRouteMatch
 } from "react-router-dom";
+import Search from './features/Search/Search';
 
 export default function App() {
   const isAuthenticated = useSelector(selectAuthentication);
 
   if(isAuthenticated) {
     return (
-      <Router>
-        <div>
-            <nav>
-                <ul>
-                    <li>
-                        <NavLink to="/home" activeClassName="active">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/subscriptions" activeClassName="active">Subscriptions</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/channel" activeClassName="active">Channel</NavLink>
-                    </li>
-                </ul>
-            </nav>
+        <Router>
+            <div className="nav-div">
+                <nav className="nav-links">
+                    <ul>
+                        <li>
+                            <NavLink to="/home" activeClassName="active">Home</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/subscriptions" activeClassName="active">Subscriptions</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/channel" activeClassName="active">Channel</NavLink>
+                        </li>
+                    </ul>
+                </nav>
 
+                <div className="nav-search">
+                <Search />
+                </div>
+            </div>
             <Switch>
                 <Route path="/home">
                     <HomeRoutes />
@@ -45,8 +50,7 @@ export default function App() {
                     <ChannelRoutes />
                 </Route>
             </Switch>
-        </div>
-      </Router>
+        </Router>
     )
   };
   return <Authentication />;
