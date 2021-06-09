@@ -1,12 +1,28 @@
 .authenticatePage {
+    background-image: url('../../images/israel-palacio-Y20JJ_ddy9M-unsplash-1300x867.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100%;
     width: 100%;
-    background-color: #565656;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-grid;
+    grid-template: 1fr / 1fr;
 }
 
-button {
+.overlay {
+    grid-area: 1 / 1 / span 1 / span 1;
+    background-color: #565656;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+}
+
+.authenticatePage button {
     font-family: 'Raleway', sans-serif;
+    font-size: 2em !important;
+    width: 8em;
+    grid-area: 1 / 1 / span 1 / span 1;
+    z-index: 2;
+    margin: auto;
 }

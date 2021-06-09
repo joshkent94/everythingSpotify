@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
-import { selectAuthentication } from './features/Authentication/AuthenticationSlice';
+import { selectAuthentication, setToken, removeToken } from './features/Authentication/AuthenticationSlice';
 import Music from './components/Music/Music';
 import Podcasts from './components/Podcasts/Podcasts';
 import Account from './components/Account/Account';
@@ -16,9 +16,23 @@ import {
 import Search from './features/Search/Search';
 
 export default function App() {
-  const isAuthenticated = useSelector(selectAuthentication);
+  const authState = useSelector(selectAuthentication);
+  const dispatch = useDispatch();
 
-  if(isAuthenticated) {
+  const signOut = () => {
+    dispatch(removeToken({token: ''}));
+  };
+
+  if(window.location.href.includes("access_token")) {
+    let Url = window.location.href;
+    let accessToken = Url.slice(Url.indexOf("=") + 1, Url.indexOf("&"));
+    let expiresIn = parseInt(Url.slice(Url.indexOf("expires_in=") + 11, Url.slice(Url.indexOf("expires_in=") + 11).slice(0, Url.slice(Url.indexOf("expires_in=") + 11).indexOf("&")))) * 1000;
+    window.setTimeout(() => accessToken = '', expiresIn);
+    window.history.pushState('Access Token', null, '/');
+    dispatch(setToken({token: accessToken}));
+  };
+
+  if(authState.accessToken) {
     return (
         <Router>
             <div className="nav-div">
@@ -32,6 +46,9 @@ export default function App() {
                         </li>
                         <li>
                             <NavLink to="/account" activeClassName="active">Account</NavLink>
+                        </li>
+                        <li>
+                            <button onClick={signOut}>Sign Out</button>
                         </li>
                     </ul>
                 </nav>
@@ -55,7 +72,16 @@ export default function App() {
         </Router>
     )
   };
-  return <Authentication />;
+  return (
+    <Router>
+        <Redirect to="/signin" />
+        <Switch>
+            <Route path="/signin">
+                <Authentication />
+            </Route>
+        </Switch>
+    </Router>
+  );
 };
 
 function MusicRoutes() {
