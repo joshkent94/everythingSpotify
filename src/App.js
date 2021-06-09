@@ -2,15 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
 import { selectAuthentication } from './features/Authentication/AuthenticationSlice';
-import Home from './components/home/Home';
-import Subscriptions from './components/subscriptions/Subscriptions';
-import Channel from './components/channel/Channel';
+import Music from './components/Music/Music';
+import Podcasts from './components/Podcasts/Podcasts';
+import Account from './components/Account/Account';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
-  useRouteMatch
+  useRouteMatch,
+  Redirect
 } from "react-router-dom";
 import Search from './features/Search/Search';
 
@@ -24,74 +25,75 @@ export default function App() {
                 <nav className="nav-links">
                     <ul>
                         <li>
-                            <NavLink to="/home" activeClassName="active">Home</NavLink>
+                            <NavLink to="/music" activeClassName="active">Music</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/subscriptions" activeClassName="active">Subscriptions</NavLink>
+                            <NavLink to="/podcasts" activeClassName="active">Podcasts</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/channel" activeClassName="active">Channel</NavLink>
+                            <NavLink to="/account" activeClassName="active">Account</NavLink>
                         </li>
                     </ul>
                 </nav>
 
                 <div className="nav-search">
-                <Search />
+                    <Search />
                 </div>
             </div>
             <Switch>
-                <Route path="/home">
-                    <HomeRoutes />
+                <Route path="/music">
+                    <MusicRoutes />
                 </Route>
-                <Route path="/subscriptions">
-                    <SubscriptionsRoutes />
+                <Route path="/podcasts">
+                    <PodcastsRoutes />
                 </Route>
-                <Route path="/channel">
-                    <ChannelRoutes />
+                <Route path="/account">
+                    <AccountRoutes />
                 </Route>
             </Switch>
+            <Redirect to="/music" />
         </Router>
     )
   };
   return <Authentication />;
 };
 
-function HomeRoutes() {
+function MusicRoutes() {
   let match = useRouteMatch();
 
   return (
       <>
           <Switch>
               <Route path={`${match.path}`}>
-                  <Home />
+                  <Music />
               </Route>
           </Switch>
       </>
   )
 };
 
-function SubscriptionsRoutes() {
+function PodcastsRoutes() {
   let match = useRouteMatch();
 
   return (
       <>
           <Switch>
               <Route path={`${match.path}`}>
-                  <Subscriptions />
+                  <Podcasts />
               </Route>
           </Switch>
       </>
   )
 };
 
-function ChannelRoutes() {
+function AccountRoutes() {
   let match = useRouteMatch();
 
   return (
       <>
           <Switch>
               <Route path={`${match.path}`}>
-                  <Channel />
+                  <Account />
               </Route>
           </Switch>
       </>

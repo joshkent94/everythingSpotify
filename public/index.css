@@ -19,13 +19,13 @@ body {
   box-sizing: border-box;
   align-items: center;
   justify-content: space-evenly;
+  background-color: #d7cec7;
 }
 
 .nav-links {
   width: 60%;
   margin: 0;
   display: inline-block;
-
 }
 
 .nav-search {
@@ -47,9 +47,9 @@ nav ul li {
 }
 
 nav a {
-  color: black;
-  font-size: 16px;
+  color: #565656;
   text-decoration: none;
+  font-weight: 500;
 }
 
 nav a.active {
@@ -57,5 +57,5 @@ nav a.active {
 }
 
 nav a:hover {
-  color: black;
+  color: #565656;
 }

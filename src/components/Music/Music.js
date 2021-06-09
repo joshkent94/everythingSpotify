@@ -1,4 +1,4 @@
-export default function Channel() {
+export default function Music() {
     return (
         <p>Some text</p>
     );

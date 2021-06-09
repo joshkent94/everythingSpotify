@@ -1,4 +1,4 @@
-export default function Subscriptions() {
+export default function Account() {
     return (
         <p>Some text</p>
     );

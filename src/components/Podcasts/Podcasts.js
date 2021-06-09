@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Podcasts() {
     return (
         <p>Some text</p>
     );
