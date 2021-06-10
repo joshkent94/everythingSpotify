@@ -1,5 +1,8 @@
 export default function Music() {
     return (
-        <p>Some text</p>
+        <div>
+            <h1>How about some music?</h1>
+            <h3>Search, play and save songs to your Spotify playlists</h3>
+        </div>
     );
 };

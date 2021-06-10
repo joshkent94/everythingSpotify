@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
-import { selectAuthentication, setToken, removeToken } from './features/Authentication/AuthenticationSlice';
+import { selectAccessToken, setToken, removeToken } from './features/Authentication/AuthenticationSlice';
 import Music from './components/Music/Music';
 import Podcasts from './components/Podcasts/Podcasts';
 import Account from './components/Account/Account';
@@ -16,7 +16,7 @@ import {
 import Search from './features/Search/Search';
 
 export default function App() {
-  const authState = useSelector(selectAuthentication);
+  const accessToken = useSelector(selectAccessToken);
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -32,7 +32,7 @@ export default function App() {
     dispatch(setToken({token: accessToken}));
   };
 
-  if(authState.accessToken) {
+  if(accessToken) {
     return (
         <Router>
             <div className="nav-div">

@@ -1,23 +1,25 @@
 import { useSelector } from "react-redux";
-import { selectAuthentication } from "./AuthenticationSlice";
+import { selectClientId, selectRedirectUri, selectAccessToken } from "./AuthenticationSlice";
 import './Authentication.css';
 
 export default function Authentication() {
-    const authState = useSelector(selectAuthentication);
+    const accessToken = useSelector(selectAccessToken);
+    const clientId = useSelector(selectClientId);
+    const redirectUri = useSelector(selectRedirectUri);
 
-    const signIn = (authState) => {
+    const signIn = (accessToken) => {
         return () => {
-            if(authState.accessToken) {
+            if(accessToken) {
                 return;
             } else {
-                window.location = `https://accounts.spotify.com/authorize?client_id=${authState.clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${authState.redirectUri}`;
+                window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             };
         };
     };
 
     return (
         <div className="authenticatePage">
-            <button onClick={signIn(authState)} className="btn btn-outline-light">Sign In</button>
+            <button onClick={signIn(accessToken)} className="btn btn-outline-light">Sign In</button>
             <div className="overlay"></div>
         </div>
     )
