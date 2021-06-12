@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
 import { selectAccessToken, setToken, removeToken } from './features/Authentication/AuthenticationSlice';
 import Music from './components/Music/Music';
-import Podcasts from './components/Podcasts/Podcasts';
-import Account from './components/Account/Account';
+import Playlists from './components/Playlists/Playlists';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
-  useRouteMatch,
   Redirect
 } from "react-router-dom";
 import Search from './features/Search/Search';
+import Loading from './components/Loading/loading';
+import Error from './components/Error/error';
+import { selectIsRejected } from './features/Search/SearchSlice';
 
 export default function App() {
   const accessToken = useSelector(selectAccessToken);
+  const isRejected = useSelector(selectIsRejected);
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -33,45 +35,57 @@ export default function App() {
   };
 
   if(accessToken) {
-    return (
-        <Router>
-            <div className="nav-div">
-                <nav className="nav-links">
-                    <ul>
-                        <li>
-                            <NavLink to="/music" activeClassName="active">Music</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/podcasts" activeClassName="active">Podcasts</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/account" activeClassName="active">Account</NavLink>
-                        </li>
-                        <li>
-                            <button onClick={signOut}>Sign Out</button>
-                        </li>
-                    </ul>
-                </nav>
 
-                <div className="nav-search">
-                    <Search />
+    if(isRejected) {
+        return (
+            <Router>
+                <Redirect to="/error" />
+                <Switch>
+                    <Route path="/error">
+                        <Error />
+                    </Route>
+                </Switch>
+            </Router>
+          );
+    };
+
+    return (
+        <div id="main">
+            <Loading />
+            <Router>
+                <div className="nav-div">
+                    <nav className="nav-links">
+                        <ul>
+                            <li>
+                                <NavLink to="/music" activeClassName="active">Music</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/playlists" activeClassName="active">Playlists</NavLink>
+                            </li>
+                            <li>
+                                <button onClick={signOut}>Sign Out</button>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div className="nav-search">
+                        <Search />
+                    </div>
                 </div>
-            </div>
-            <Switch>
-                <Route path="/music">
-                    <MusicRoutes />
-                </Route>
-                <Route path="/podcasts">
-                    <PodcastsRoutes />
-                </Route>
-                <Route path="/account">
-                    <AccountRoutes />
-                </Route>
-            </Switch>
-            <Redirect to="/music" />
-        </Router>
+                <Switch>
+                    <Route path="/music">
+                        <Music />
+                    </Route>
+                    <Route path="/account">
+                        <Playlists />
+                    </Route>
+                </Switch>
+                <Redirect to="/music" />
+            </Router>
+        </div>
     )
   };
+  
   return (
     <Router>
         <Redirect to="/signin" />
@@ -82,46 +96,4 @@ export default function App() {
         </Switch>
     </Router>
   );
-};
-
-function MusicRoutes() {
-  let match = useRouteMatch();
-
-  return (
-      <>
-          <Switch>
-              <Route path={`${match.path}`}>
-                  <Music />
-              </Route>
-          </Switch>
-      </>
-  )
-};
-
-function PodcastsRoutes() {
-  let match = useRouteMatch();
-
-  return (
-      <>
-          <Switch>
-              <Route path={`${match.path}`}>
-                  <Podcasts />
-              </Route>
-          </Switch>
-      </>
-  )
-};
-
-function AccountRoutes() {
-  let match = useRouteMatch();
-
-  return (
-      <>
-          <Switch>
-              <Route path={`${match.path}`}>
-                  <Account />
-              </Route>
-          </Switch>
-      </>
-  )
 };

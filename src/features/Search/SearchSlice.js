@@ -3,14 +3,24 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 export const fetchResults = createAsyncThunk(
     'search/fetchResults',
     async({searchTerm, accessToken}) => {
-        const urlToSend = `https://api.spotify.com/v1/search?type=track,album,artist&q=${searchTerm}&limit=50`;
+        const urlToSend = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=50`;
         const response = await fetch(urlToSend, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
         const jsonResponse = await response.json();
-        return jsonResponse;
+        let tracks = jsonResponse.tracks.items.map(track => {
+            let trackInfo = {
+                'id': track.id,
+                'name': track.name,
+                'artist': track.artists[0].name,
+                'album': track.album.name,
+                'uri': track.uri
+            }
+            return trackInfo;
+        });
+        return tracks;
     }
 );
 
@@ -18,7 +28,9 @@ const searchSlice = createSlice({
     name: 'search',
     initialState: {
         searchTerm: '',
-        results: ''
+        results: [],
+        isLoading: false,
+        isRejected: false
     },
     reducers: {
         setTerm: (state, action) => {
@@ -27,19 +39,25 @@ const searchSlice = createSlice({
     },
     extraReducers: {
         [fetchResults.pending]: (state, action) => {
-            return;
+            state.isLoading = true;
+            state.isRejected = false;
         },
         [fetchResults.fulfilled]: (state, action) => {
-            return;
+            state.isLoading = false;
+            state.isRejected = false;
+            state.results = action.payload;
         },
         [fetchResults.rejected]: (state, action) => {
-            return;
+            state.isRejected = true;
+            state.isLoading = false;
         }
     }
 });
 
 export const selectSearchTerm = state => state.search.searchTerm;
 export const selectSearchResults = state => state.search.results;
+export const selectIsLoading = state => state.search.isLoading;
+export const selectIsRejected = state => state.search.isRejected;
 export const {setTerm, setResults} = searchSlice.actions;
 const searchReducer = searchSlice.reducer;
 export default searchReducer;

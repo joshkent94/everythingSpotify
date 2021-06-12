@@ -15,7 +15,10 @@ export default function Search() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(fetchResults({searchTerm: searchTerm, accessToken: accessToken}));
+        dispatch(fetchResults({
+            searchTerm: searchTerm,
+            accessToken: accessToken
+        }));
     };
 
     return (
@@ -23,7 +26,7 @@ export default function Search() {
             <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search..."
+                placeholder="Search for a track..."
                 aria-label="Search"
                 onChange={handleSearch}
             />
