@@ -1,5 +1,5 @@
 import Tracklist from "../Tracklist/tracklist";
-import './music.css';
+import './Music.css';
 
 export default function Music() {
     return (
