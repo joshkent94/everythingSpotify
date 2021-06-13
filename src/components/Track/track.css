@@ -1,0 +1,48 @@
+.tile {
+    display: inline-flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin: 0.3em;
+    background-color: #c09f80;
+    border-radius: 5em;
+}
+
+.track-info {
+    width: 70%;
+}
+
+.buttons {
+    display: inline-flex;
+    align-items: center;
+    width: 30%;
+}
+
+.music-button {
+    border-style: none;
+    padding: 0;
+    margin: 0 0.3em;
+    background-color: white;
+    font-size: 48px;
+    background-color: #c09f80;
+}
+
+.pause {
+    background-image: url("../../images/pause-16.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 0.4em;
+    width: 0.4em;
+}
+
+h5 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0.3em;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}

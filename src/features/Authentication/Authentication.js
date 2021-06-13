@@ -6,13 +6,14 @@ export default function Authentication() {
     const accessToken = useSelector(selectAccessToken);
     const clientId = useSelector(selectClientId);
     const redirectUri = useSelector(selectRedirectUri);
+    const scopes = 'playlist-modify-public user-read-playback-state user-modify-playback-state';
 
     const signIn = (accessToken) => {
         return () => {
             if(accessToken) {
                 return;
             } else {
-                window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+                window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirectUri}`;
             };
         };
     };

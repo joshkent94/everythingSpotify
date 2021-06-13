@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Authentication from './features/Authentication/Authentication';
 import { selectAccessToken, setToken, removeToken } from './features/Authentication/AuthenticationSlice';
-import Music from './components/Music/Music';
+import Music from './components/Music/music';
 import Playlists from './components/Playlists/Playlists';
 import {
   BrowserRouter as Router,

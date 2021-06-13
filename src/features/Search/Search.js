@@ -26,7 +26,7 @@ export default function Search() {
             <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search for a track..."
+                placeholder="Search for a song..."
                 aria-label="Search"
                 onChange={handleSearch}
             />
