@@ -1,7 +1,7 @@
 .tile {
     display: inline-flex;
     align-items: center;
-    width: 50%;
+    width: 60%;
     justify-content: space-between;
     margin: 0.3em;
     background-color: #c09f80;
@@ -9,13 +9,13 @@
 }
 
 .track-info {
-    width: 70%;
+    width: 60%;
 }
 
 .buttons {
     display: inline-flex;
     align-items: center;
-    width: 30%;
+    width: 40%;
 }
 
 .music-button {
@@ -25,6 +25,14 @@
     background-color: white;
     font-size: 48px;
     background-color: #c09f80;
+    width: 10%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#save {
+    font-size: 30px;
 }
 
 .pause {
@@ -32,8 +40,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 0.4em;
-    width: 0.4em;
+    height: 0.38em;
+    width: 0.38em;
 }
 
 h5 {

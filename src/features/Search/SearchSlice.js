@@ -1,9 +1,33 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
+export const loadFavourites = createAsyncThunk(
+    'search/loadFavourites',
+    async({accessToken}) => {
+        const urlToSend = `https://api.spotify.com/v1/me/top/tracks?limit=20`;
+        const response = await fetch(urlToSend, {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+        const jsonResponse = await response.json();
+        let tracks = jsonResponse.items.map(track => {
+            let trackInfo = {
+                'id': track.id,
+                'name': track.name,
+                'artist': track.artists[0].name,
+                'album': track.album.name,
+                'uri': track.uri
+            }
+            return trackInfo;
+        });
+        return tracks;
+    }
+);
+
 export const fetchResults = createAsyncThunk(
     'search/fetchResults',
     async({searchTerm, accessToken}) => {
-        const urlToSend = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=50`;
+        const urlToSend = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}&limit=20`;
         const response = await fetch(urlToSend, {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -50,7 +74,20 @@ const searchSlice = createSlice({
         [fetchResults.rejected]: (state, action) => {
             state.isRejected = true;
             state.isLoading = false;
-        }
+        },
+        [loadFavourites.pending]: (state, action) => {
+            state.isLoading = true;
+            state.isRejected = false;
+        },
+        [loadFavourites.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.isRejected = false;
+            state.results = action.payload;
+        },
+        [loadFavourites.rejected]: (state, action) => {
+            state.isRejected = true;
+            state.isLoading = false;
+        },
     }
 });
 

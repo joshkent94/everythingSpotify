@@ -42,3 +42,16 @@ export const pauseSong = async(accessToken) => {
         throw new Error('An error occurred');
     } catch(error) {};
 };
+
+export const saveSong = async(accessToken, trackId) => {
+    try {
+        const urlToSend = `https://api.spotify.com/v1/me/tracks?ids=${trackId}`;
+        await fetch(urlToSend, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+        throw new Error('An error occurred');
+    } catch(error) {};
+};
