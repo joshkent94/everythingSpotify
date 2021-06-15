@@ -59,6 +59,9 @@ const searchSlice = createSlice({
     reducers: {
         setTerm: (state, action) => {
             state.searchTerm = action.payload.searchTerm;
+        },
+        setRejected: (state, action) => {
+            state.isRejected = action.payload;
         }
     },
     extraReducers: {
@@ -95,6 +98,6 @@ export const selectSearchTerm = state => state.search.searchTerm;
 export const selectSearchResults = state => state.search.results;
 export const selectIsLoading = state => state.search.isLoading;
 export const selectIsRejected = state => state.search.isRejected;
-export const {setTerm, setResults} = searchSlice.actions;
+export const {setTerm, setRejected} = searchSlice.actions;
 const searchReducer = searchSlice.reducer;
 export default searchReducer;
