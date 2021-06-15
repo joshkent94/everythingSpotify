@@ -5,7 +5,7 @@ export default function Error() {
     const history = useHistory();
 
     const backToSignIn = () => {
-        history.push(`/signin`);
+        history.push(`/`);
         window.location.reload();
     };
 
