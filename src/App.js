@@ -15,10 +15,11 @@ import Search from './features/Search/Search';
 import Loading from './components/Loading/loading';
 import Error from './components/Error/error';
 import { selectIsRejected } from './features/Search/SearchSlice';
+import { selectIsPlaylistsRejected } from './components/Playlists/PlaylistsSlice';
 
 export default function App() {
   const accessToken = useSelector(selectAccessToken);
-  const isRejected = useSelector(selectIsRejected);
+  const isRejected = [useSelector(selectIsRejected), useSelector(selectIsPlaylistsRejected)];
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -36,7 +37,7 @@ export default function App() {
 
   if(accessToken) {
 
-    if(isRejected) {
+    if(isRejected[0] || isRejected[1]) {
         return (
             <Router>
                 <Redirect to="/error" />
@@ -76,7 +77,7 @@ export default function App() {
                     <Route path="/music">
                         <Music />
                     </Route>
-                    <Route path="/account">
+                    <Route path="/playlists">
                         <Playlists />
                     </Route>
                 </Switch>
