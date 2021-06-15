@@ -1,7 +1,8 @@
 import './Search.css';
-import {selectSearchTerm, setTerm, fetchResults} from './SearchSlice';
+import {selectSearchTerm, setTerm, fetchResults, loadFavourites} from './SearchSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { selectAccessToken } from '../Authentication/AuthenticationSlice';
+import { useEffect } from 'react';
 
 export default function Search() {
     const dispatch = useDispatch();
@@ -20,6 +21,18 @@ export default function Search() {
             accessToken: accessToken
         }));
     };
+
+    const fetchFavourites = () => {
+        dispatch(loadFavourites({
+            accessToken: accessToken
+        }));
+    };
+
+    useEffect(() => {
+        if(searchTerm === '') {
+            fetchFavourites();
+        };
+    });
 
     return (
         <form className="d-flex" onSubmit={handleSubmit}>
