@@ -10,15 +10,50 @@ export const loadPlaylists = createAsyncThunk(
             }
         });
         const jsonResponse = await response.json();
-        let playlists = jsonResponse.items.map(playlist => {
+        const playlists = jsonResponse.items.map(playlist => {
             let playlistInfo = {
                 'id': playlist.id,
                 'name': playlist.name,
-                'uri': playlist.uri
+                'uri': playlist.uri,
+                'tracks': []
             }
             return playlistInfo;
         });
         return playlists;
+    }
+);
+
+export const loadPlaylistTracks = createAsyncThunk(
+    'playlists/loadPlaylistTracks',
+    async({accessToken, playlist}) => {
+
+        const trackArray = async() => {
+            const urlToSend = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
+            const response = await fetch(urlToSend, {
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            });
+            const jsonResponse = await response.json();
+            const tracks = jsonResponse.items.map(track => {
+                let trackInfo = {
+                    'id': track.track.id,
+                    'name': track.track.name,
+                    'artist': track.track.artists[0].name,
+                    'album': track.track.album.name,
+                    'uri': track.track.uri
+                }
+                return trackInfo;
+            });
+            return tracks;
+        };
+
+        const newPlaylist = {
+            ...playlist,
+            'tracks': await trackArray()
+        };
+
+        return newPlaylist;
     }
 );
 
@@ -40,6 +75,29 @@ const playlistsSlice = createSlice({
             state.playlists = action.payload;
         },
         [loadPlaylists.rejected]: (state, action) => {
+            state.isRejected = true;
+            state.isLoading = false;
+        },
+        [loadPlaylistTracks.pending]: (state, action) => {
+            state.isLoading = true;
+            state.isRejected = false;
+        },
+        [loadPlaylistTracks.fulfilled]: (state, action) => {
+            const {id, tracks} = action.payload;
+            state.isLoading = false;
+            state.isRejected = false;
+            state.playlists = state.playlists.map(playlist => {
+                if(playlist.id === id) {
+                    return {
+                        ...playlist,
+                        'tracks': tracks
+                    };
+                } else {
+                    return playlist;
+                };
+            });
+        },
+        [loadPlaylistTracks.rejected]: (state, action) => {
             state.isRejected = true;
             state.isLoading = false;
         }
