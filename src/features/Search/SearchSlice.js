@@ -54,7 +54,7 @@ const searchSlice = createSlice({
         searchTerm: '',
         results: [],
         isLoading: false,
-        isRejected: false
+        isRejected: false,
     },
     reducers: {
         setTerm: (state, action) => {

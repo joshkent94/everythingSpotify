@@ -1,0 +1,23 @@
+.playlist-tile {
+    display: inline-flex;
+    align-items: center;
+    width: 50%;
+    justify-content: space-between;
+    margin: 0.3em;
+    background-color: #c09f80;
+    border-radius: 5em;
+}
+
+.playlist-description {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.playlist-buttons {
+    display: inline-flex;
+    align-items: center;
+    width: 25%;
+}

@@ -79,7 +79,6 @@ const playlistsSlice = createSlice({
             state.isLoading = false;
         },
         [loadPlaylistTracks.pending]: (state, action) => {
-            state.isLoading = true;
             state.isRejected = false;
         },
         [loadPlaylistTracks.fulfilled]: (state, action) => {

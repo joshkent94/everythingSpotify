@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {selectAccessToken} from '../../features/Authentication/AuthenticationSlice';
 import { loadPlaylistTracks } from "../Playlists/PlaylistsSlice";
+import './playlist.css';
 
 export default function Playlist(props) {
     const playlist = props.playlist;
@@ -18,11 +19,12 @@ export default function Playlist(props) {
     });
     
     return (
-        <div className="tile">
-            <div>
+        <div className="playlist-tile">
+            <div className="playlist-description">
                 <h5>{playlist.name}</h5>
+                <p>Songs: {playlist.tracks.length}</p>
             </div>
-            <div className="buttons">
+            <div className="playlist-buttons">
                 <button className="music-button">&#9656;</button>
             </div>
         </div>

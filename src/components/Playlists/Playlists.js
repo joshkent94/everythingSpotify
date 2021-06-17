@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAccessToken } from "../../features/Authentication/AuthenticationSlice";
 import Playlist from "../Playlist/playlist";
 import { loadPlaylists, selectPlaylists } from "./PlaylistsSlice";
+import './Playlists.css';
 
 export default function Playlists() {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function Playlists() {
                     make sure to open Spotify on your device of choice and play a song
                 </p>
             </div>
-            <div className="track-area">
+            <div className="playlist-area">
                 {playlists.map(playlist => {
                     return <Playlist key={playlist.id} playlist={playlist} />
                 })}

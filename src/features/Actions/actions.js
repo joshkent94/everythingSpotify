@@ -96,3 +96,11 @@ export const checkPlayback = async(accessToken) => {
         throw new Error('An error occurred');
     } catch(error) {};
 };
+
+export const filterPlaylists = (playlists, searchTerm) => {
+    if(playlists.length === 0) {
+        return;
+    };
+    const filteredPlaylists = playlists.filter(playlist => playlist.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    return filteredPlaylists;
+};
