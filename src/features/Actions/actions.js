@@ -97,10 +97,34 @@ export const checkPlayback = async(accessToken) => {
     } catch(error) {};
 };
 
-export const filterPlaylists = (playlists, searchTerm) => {
-    if(playlists.length === 0) {
-        return;
+export const playPlaylist = async(playlist, accessToken) => {
+    const playbackDetails = await checkPlayback(accessToken);
+    let deviceId;
+
+    if(playbackDetails) {
+        deviceId = playbackDetails[0];
     };
-    const filteredPlaylists = playlists.filter(playlist => playlist.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    return filteredPlaylists;
+
+    if (deviceId) {
+        try {
+            const urlToSend = `https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`;
+            const playlistUris = playlist.tracks.map(track => {
+                return track.uri;
+            });
+            await fetch(urlToSend, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                body: JSON.stringify({
+                    uris: playlistUris
+                })
+            });
+            return true;
+        } catch(error) {};
+    }
+    
+    else {
+        return false;
+    };
 };

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { playPlaylist } from "../../features/Actions/actions";
 import {selectAccessToken} from '../../features/Authentication/AuthenticationSlice';
+import { setRejected } from "../../features/Search/SearchSlice";
 import { loadPlaylistTracks } from "../Playlists/PlaylistsSlice";
 import './playlist.css';
 
@@ -17,6 +19,14 @@ export default function Playlist(props) {
             }));
         };
     });
+
+    const sendPlayPlaylist = async() => {
+        if(await playPlaylist(playlist, accessToken)) {
+            return;
+        } else {
+            dispatch(setRejected(true));
+        };
+    };
     
     return (
         <div className="playlist-tile">
@@ -25,7 +35,7 @@ export default function Playlist(props) {
                 <p>Songs: {playlist.tracks.length}</p>
             </div>
             <div className="playlist-buttons">
-                <button className="music-button">&#9656;</button>
+                <button className="music-button" onClick={sendPlayPlaylist}>&#9656;</button>
             </div>
         </div>
     );
