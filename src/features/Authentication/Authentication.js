@@ -6,7 +6,7 @@ export default function Authentication() {
     const accessToken = useSelector(selectAccessToken);
     const clientId = useSelector(selectClientId);
     const redirectUri = useSelector(selectRedirectUri);
-    const scopes = 'playlist-modify-public user-read-playback-state user-modify-playback-state user-top-read user-library-modify playlist-read-private playlist-read-collaborative';
+    const scopes = 'playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-top-read user-library-modify playlist-read-private playlist-read-collaborative';
 
     const signIn = () => {
         if(accessToken) {

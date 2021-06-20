@@ -1,7 +1,12 @@
 import Tracklist from "../Tracklist/tracklist";
 import './Music.css';
+import AddSongToPlaylist from "../AddSongToPlaylist/AddSongToPlaylist";
+import { useSelector } from "react-redux";
+import { selectPlaylistSelect } from "../Playlists/PlaylistsSlice";
 
 export default function Music() {
+    const isPlaylistSelect = useSelector(selectPlaylistSelect);
+
     return (
         <div>
             <div className="heading">
@@ -12,7 +17,7 @@ export default function Music() {
                     make sure to open Spotify on your device of choice and play a song
                 </p>
             </div>
-            <Tracklist />
+            {isPlaylistSelect ? <AddSongToPlaylist /> : <Tracklist />}
         </div>
     );
 };

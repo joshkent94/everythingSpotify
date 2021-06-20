@@ -62,7 +62,17 @@ const playlistsSlice = createSlice({
     initialState: {
         isLoading: false,
         isRejected: false,
-        playlists: []
+        playlists: [],
+        playlistSelect: false,
+        trackToAdd: ''
+    },
+    reducers: {
+        setPlaylistSelect: (state, action) => {
+            state.playlistSelect = action.payload;
+        },
+        setTrackToAdd: (state, action) => {
+            state.trackToAdd = action.payload;
+        }
     },
     extraReducers: {
         [loadPlaylists.pending]: (state, action) => {
@@ -106,5 +116,8 @@ const playlistsSlice = createSlice({
 export const selectPlaylists = state => state.playlists.playlists;
 export const selectIsPlaylistsLoading = state => state.playlists.isLoading;
 export const selectIsPlaylistsRejected = state => state.playlists.isRejected;
+export const selectPlaylistSelect = state => state.playlists.playlistSelect;
+export const selectTrackToAdd = state => state.playlists.trackToAdd;
+export const {setPlaylistSelect, setTrackToAdd} = playlistsSlice.actions;
 const playlistsReducer = playlistsSlice.reducer;
 export default playlistsReducer;

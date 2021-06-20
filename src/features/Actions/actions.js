@@ -128,3 +128,20 @@ export const playPlaylist = async(playlist, accessToken) => {
         return false;
     };
 };
+
+export const addSongToPlaylist = async(playlist, accessToken, track) => {
+    try {
+        const urlToSend = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
+        await fetch(urlToSend, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uris: [track]
+            })
+        });
+        throw new Error('An error occurred');
+    } catch(error) {};
+};
