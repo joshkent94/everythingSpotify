@@ -1,0 +1,30 @@
+.add-to-playlist {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-to-playlist-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+}
+
+.add-to-playlist-heading h3 {
+    margin: 0;
+}
+
+.back-button {
+    position: absolute;
+    left: 0.8em;
+    background-color: #d7cec7;
+    border-style: none;
+    font-size: 2em;
+    border-radius: 50%;
+    height: 1.5em;
+    width: 1.5em;
+}

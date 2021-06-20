@@ -24,6 +24,7 @@ export default function Playlists() {
                 <p>
                     Music will play on whichever device you last played Spotify,
                     make sure to open Spotify on your device of choice and play a song
+                    before using this app
                 </p>
             </div>
             <div className="playlist-area">

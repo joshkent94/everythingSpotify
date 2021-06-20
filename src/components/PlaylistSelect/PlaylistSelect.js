@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSongToPlaylist } from "../../features/Actions/actions";
 import { selectAccessToken } from "../../features/Authentication/AuthenticationSlice";
 import { loadPlaylistTracks, selectTrackToAdd, setPlaylistSelect, setTrackToAdd } from "../Playlists/PlaylistsSlice";
+import './PlaylistSelect.css';
 
 export default function PlaylistSelect(props) {
     const playlist = props.playlist;
@@ -30,7 +31,7 @@ export default function PlaylistSelect(props) {
     };
 
     return (
-        <div className="playlist-tile">
+        <div className="playlist-tile playlist-select-tile">
             <div className="playlist-description">
                 <h5>{playlist.name}</h5>
                 <p>Songs: {playlist.tracks.length}</p>
