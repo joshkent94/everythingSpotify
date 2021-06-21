@@ -31,7 +31,7 @@ export default function PlaylistSelect(props) {
     };
 
     return (
-        <div className="playlist-tile playlist-select-tile">
+        <div id="playlist-select-tile" className="playlist-tile">
             <div className="playlist-description">
                 <h5>{playlist.name}</h5>
                 <p>Songs: {playlist.tracks.length}</p>

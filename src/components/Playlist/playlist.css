@@ -6,6 +6,7 @@
     margin: 0.3em;
     background-color: #c09f80;
     border-radius: 5em;
+    padding: 1em;
 }
 
 .playlist-description {
@@ -20,4 +21,23 @@
     display: inline-flex;
     align-items: center;
     width: 25%;
+}
+
+@media screen and (max-width: 768px) {
+    .playlist-tile {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em;
+        border-radius: 2em;
+        width: 70%;
+        min-width:fit-content;
+    }
+
+    .playlist-buttons {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        min-width: max-content;
+    }
 }

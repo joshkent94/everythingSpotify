@@ -28,3 +28,21 @@
     height: 1.5em;
     width: 1.5em;
 }
+
+@media screen and (max-width: 768px) {
+    .add-to-playlist-heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2em;
+    }
+
+    .back-button {
+        position: unset;
+    }
+
+    .add-to-playlist-heading h3 {
+        margin-bottom: 1em;
+    }
+}

@@ -17,7 +17,7 @@ export const loadFavourites = createAsyncThunk(
                 'artist': track.artists[0].name,
                 'album': track.album.name,
                 'uri': track.uri
-            }
+            };
             return trackInfo;
         });
         return tracks;

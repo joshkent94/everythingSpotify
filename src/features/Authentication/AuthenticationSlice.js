@@ -4,7 +4,7 @@ const authenticationSlice = createSlice({
     name: 'authentication',
     initialState: {
         clientId: 'd6858e23b252449da9e1b7d71ee74f05',
-        redirectUri: 'http://localhost:3000/',
+        redirectUri: 'https://everythingspotify.netlify.app/',
         accessToken: ''
     },
     reducers: {
